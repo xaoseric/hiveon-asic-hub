@@ -1,21 +1,26 @@
 FROM ubuntu:24.04
 
-RUN apt update
-RUN apt install -y sudo
-RUN apt install -y curl
-RUN apt install -y python3
+# Install dependencies and clean up
+RUN apt update && \
+    apt install -y --no-install-recommends sudo curl python3 && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN curl -f -o /usr/bin/systemctl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py
-RUN chmod +x /usr/bin/systemctl
+# Download and setup systemctl replacement
+RUN curl -f -o /usr/bin/systemctl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py && \
+    chmod +x /usr/bin/systemctl
 
-RUN curl -f -o install.sh https://download.hiveos.farm/hub/install.sh
-RUN chmod +x ./install.sh
+# Download and prepare Hiveon ASIC Hub install script
+RUN curl -f -o install.sh https://download.hiveos.farm/hub/install.sh && \
+    chmod +x ./install.sh
 
+# Define build arguments
 ARG HUB_CHANNEL
 ARG HUB_BUILD
 ARG HUB_REPO_URL
 ARG FARM_HASH
 
+# Install HiveOS
 RUN ./install.sh
 
-CMD systemctl init asic-hub.service
+# Set default command to start the service
+CMD ["systemctl", "init", "asic-hub.service"]
