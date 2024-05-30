@@ -5,7 +5,7 @@ LABEL description="Unofficial containerized Hiveon ASIC Hub"
 
 # Install dependencies and clean up
 RUN apt update && \
-    apt install -y --no-install-recommends sudo curl python3 && \
+    apt install -y --no-install-recommends ca-certificates sudo curl python3 && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and setup systemctl replacement
