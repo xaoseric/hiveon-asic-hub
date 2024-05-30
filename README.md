@@ -2,7 +2,7 @@
 
 This repository contains a Dockerfile to create a Docker image for Hiveon ASIC Hub on an Ubuntu 24.04 base. The image includes essential dependencies and sets up Hiveon ASIC Hub service.
 
-Built using official guide as reference point: https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/installation-linux/
+- Knowledge Base: [ASIC Hub installation on Linux](https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/installation-linux/)
 
 ## Table of Contents
 
@@ -55,24 +55,23 @@ There are 2 options to manage ASIC Hub:
 
 ## Persistance
 
-[HiveOS Knowledge Base - ASIC Hub configuration](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/)
-
-Configuration example: [config.toml](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/#configuration-example)  
-Container mount point: `/etc/asic-hub/config.toml`  
-
-Database file: `/var/lib/asic-hub/data.db`.
+Configuration mount point: `/etc/asic-hub/config.toml`  
+Database mount point: `/var/lib/asic-hub/data.db`.
 
 To apply changes, restart ASIC Hub service:
 ```bash
 docker exec asic-hub systemctl restart asic-hub
 ```
 
+- Knowledge Base: [ASIC Hub configuration](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/)
+- Knowledge Base: [Configuration example](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/#configuration-example)
+
 ## Build Arguments
 
 You can customize the build process using the following build arguments:
 
-- `HUB_CHANNEL`: The build channel, default: `stable`.
-- `HUB_BUILD`: The build version, default `latest`.
+- `HUB_CHANNEL`: The build channel, default: `stable`, other options: `beta`, `testing`.
+- `HUB_BUILD`: The build version, default: `latest`.
 - `HUB_REPO_URL`: The repository URL binary downloads, default: `https://download.hiveos.farm/hub`.
 - `FARM_HASH`: The HiveOS farm hash where to register deployed ASIC Hub.
 
@@ -82,7 +81,7 @@ Example usage of build arguments:
 docker build --build-arg HUB_CHANNEL=stable --build-arg HUB_BUILD=latest --build-arg HUB_REPO_URL=https://download.hiveos.farm/hub --build-arg FARM_HASH=yourfarmhash40chars -t soudasuwa/hiveon-asic-hub:latest .
 ```
 
-Read more on `FARM_HASH` on [HiveOS Knowledge Base - ASIC Hub registration](https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/first-setup/).
+- Knowledge Base: [ASIC Hub registration](https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/first-setup/).
 
 ## Contributing
 
