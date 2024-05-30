@@ -22,7 +22,7 @@ ARG HUB_BUILD
 ARG HUB_REPO_URL
 ARG FARM_HASH
 
-# Install HiveOS
+# Install Hiveon ASIC Hub
 RUN ./install.sh
 
 # Set default command to start the service
