@@ -1,5 +1,8 @@
 FROM ubuntu:24.04
 
+LABEL maintainer="soudasuwa@proton.me"
+LABEL description="Unofficial containerized Hiveon ASIC Hub"
+
 # Install dependencies and clean up
 RUN apt update && \
     apt install -y --no-install-recommends sudo curl python3 && \
