@@ -9,6 +9,7 @@ Built using official guide as reference point: https://hiveon.com/knowledge-base
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Persistance](#persistance)
 - [Build Arguments](#build-arguments)
 - [Contributing](#contributing)
 - [License](#license)
@@ -43,7 +44,28 @@ docker run -d -p 8800:8800 --name asic-hub soudasuwa/hiveon-asic-hub:latest
 ```
 
 This will start a container named asic-hub using the `soudasuwa/hiveon-asic-hub:latest` image.  
-Hiveon ASIC Hub is now accesible on port `8800`.
+
+There are 2 options to manage ASIC Hub:
+
+- Though web intereface accesible on port `8800`.
+- Command line:
+    ```bash
+    docker exec asic-hub hubctl
+    ```
+
+## Persistance
+
+[HiveOS Knowledge Base - ASIC Hub configuration](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/)
+
+Configuration example: [config.toml](https://hiveon.com/knowledge-base/ASIC-Hub/general/configuration/#configuration-example)  
+Container mount point: `/etc/asic-hub/config.toml`  
+
+Database file: `/var/lib/asic-hub/data.db`.
+
+To apply changes, restart ASIC Hub service:
+```bash
+docker exec asic-hub systemctl restart asic-hub
+```
 
 ## Build Arguments
 
@@ -59,6 +81,8 @@ Example usage of build arguments:
 ```bash
 docker build --build-arg HUB_CHANNEL=stable --build-arg HUB_BUILD=latest --build-arg HUB_REPO_URL=https://download.hiveos.farm/hub --build-arg FARM_HASH=yourfarmhash40chars -t soudasuwa/hiveon-asic-hub:latest .
 ```
+
+Read more on `FARM_HASH` on [HiveOS Knowledge Base - ASIC Hub registration](https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/first-setup/).
 
 ## Contributing
 
