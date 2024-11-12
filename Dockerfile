@@ -22,11 +22,11 @@ ARG HUB_BUILD
 ARG HUB_REPO_URL
 ARG FARM_HASH
 
-# Default port
-EXPOSE 8080
-
 # Install Hiveon ASIC Hub
 RUN ./install.sh
 
 # Set default command to start the service
 CMD ["systemctl", "init", "asic-hub.service"]
+
+# Default port
+EXPOSE 8800
